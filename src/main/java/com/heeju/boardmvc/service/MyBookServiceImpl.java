@@ -47,4 +47,5 @@ public class MyBookServiceImpl implements MyBookService {
         MyBookList target = myBookRepository.findById(id).orElse(null);
         myBookRepository.deleteById(id);
     }
+
 }

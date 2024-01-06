@@ -2,10 +2,9 @@ package com.heeju.boardmvc.controller;
 
 import com.heeju.boardmvc.dto.BookDTO;
 import com.heeju.boardmvc.dto.MyBookListDTO;
-import com.heeju.boardmvc.entity.MyBookList;
-import com.heeju.boardmvc.repository.MyBookRepository;
 import com.heeju.boardmvc.service.BookService;
 import com.heeju.boardmvc.service.MyBookService;
+import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,10 +13,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.management.MBeanServer;
 import java.util.List;
-
 @Controller
+@Log4j2
 public class MyBookListController {
 
     @Autowired
@@ -33,8 +31,10 @@ public class MyBookListController {
         return new ModelAndView("myBooks", "book", list);
     }
 
+
     @RequestMapping("/mylist/{id}")
     public String getMyList(@PathVariable Long id){
+        log.info("working!!!!!");
         BookDTO bookDTO = bookService.getBookById(id);
         if(bookDTO==null){
             return "redirect:/my_books";
@@ -48,5 +48,6 @@ public class MyBookListController {
         myBookService.deleteById(id);
         return "redirect:/my_books";
     }
+
 
 }
